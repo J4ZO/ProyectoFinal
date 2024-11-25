@@ -17,6 +17,7 @@ public class ChaseEnemy : State
     {
         agent = GetComponent<NavMeshAgent>();
         attack = GetComponent<AttackState>();
+        die = GetComponent<DieState>();
     }
 
     // Update is called once per frame

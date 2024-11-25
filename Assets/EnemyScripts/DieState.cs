@@ -6,7 +6,7 @@ public class DieState : State
 {
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
-    public bool IsDead {get; private set; }
+    private bool IsDead;
 
     void Start()
     {
@@ -20,6 +20,7 @@ public class DieState : State
 
     public void Damage(float damage)
     {
+        Debug.Log("Quitando vida");
         currentHealth -=damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 

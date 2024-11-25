@@ -12,6 +12,7 @@ public class AttackState : State
     void Start()
     {
         chase = GetComponent<ChaseEnemy>();
+        die = GetComponent<DieState>();
     }
     public override State RunCurrentState()
     {
