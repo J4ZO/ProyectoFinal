@@ -38,7 +38,6 @@ public class ChaseEnemy : State
         }
         else
         {
-            Debug.Log("Sigue persiguiendo"); // Stay in chase
             return this;
         }
         
