@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class StateManaganer : MonoBehaviour
 {
-    private State currentState;
-    public ChaseEnemy chase;
+    [SerializeField] private State currentState;
 
-    void Start()
-    {
-        currentState = chase;
-    }
     // Update is called once per frame
     void Update()
     {

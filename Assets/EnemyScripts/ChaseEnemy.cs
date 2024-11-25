@@ -6,10 +6,11 @@ using UnityEngine.AI;
 public class ChaseEnemy : State
 {
     [SerializeField] private Transform player;
+    private DieState die;
     private NavMeshAgent agent;
-    private float distanceToAttack = 2f;
-
     private AttackState attack; // call attack state
+
+    [SerializeField] private bool isInRange;
 
     // Start is called before the first frame update
     void Start()
@@ -26,26 +27,28 @@ public class ChaseEnemy : State
 
     public override State RunCurrentState()
     {
-        if(IsInRangeAttack())
+        if(isInRange) // Change Attack State
         {
             return attack;
         }
+        else if(die. GetDie()) // Change Die State
+        {
+            return die;
+        }
         else
         {
+            Debug.Log("Sigue persiguiendo"); // Stay in chase
             return this;
         }
         
     }
 
-
-    private bool IsInRangeAttack()
+    private void OnTriggerEnter(Collider other) 
     {
-        float distanceAttack = Vector3.Distance(transform.position, player.position);
-
-        if(distanceAttack <= distanceToAttack)
-        {
-            return true;
-        }
-        return false;
+        isInRange = other.CompareTag("Player") ? true : false;
+    }
+    private void OnTriggerExit(Collider other) 
+    {
+        isInRange = other.CompareTag("Player") ? false : true;
     }
 }
