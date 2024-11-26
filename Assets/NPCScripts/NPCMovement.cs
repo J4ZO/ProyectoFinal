@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +11,9 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private float patrolWait;
 
     [SerializeField] private Transform[] wayPoints;
-    [SerializeField] private int wayPointIndex;
+    [SerializeField] private int wayPointIndex = 0;
+    private bool isMoving;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,28 +28,21 @@ public class NPCMovement : MonoBehaviour
 
     private void Patrol()
     {
-        if( agentNPC.remainingDistance <= agentNPC.stoppingDistance)
+        if(agentNPC.remainingDistance <= agentNPC.stoppingDistance) // Check the remaining distance
         {
-            patrolTimer += Time.deltaTime;
+            patrolTimer += Time.deltaTime; // Increse the patrol time
+
             if(patrolTimer >= patrolWait)
             {
-                if(wayPointIndex == wayPoints.Length - 1)
-                {
-                    wayPointIndex = 0;
-                    patrolTimer = 0;
-                }
-                else
-                {
-                    wayPointIndex++;
-                    patrolTimer = 0;
-                }
+                wayPointIndex++; // Go to the other waypoint
+                patrolTimer = 0;
+            }
+
+            if(wayPointIndex == wayPoints.Length)
+            {
+                wayPointIndex = 0; // In case the npc arrive to the last waypoint
             }
         }
-        else
-        {
-            patrolTimer = 0;
-        }
-
-        agentNPC.destination = wayPoints[wayPointIndex].position;
+        agentNPC.SetDestination(wayPoints[wayPointIndex].position);
     }
 }
