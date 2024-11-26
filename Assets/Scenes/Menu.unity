@@ -838,7 +838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 55.754883, y: -88}
+  m_AnchoredPosition: {x: -721, y: -430}
   m_SizeDelta: {x: -1491.8, y: -999.5403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839655513
@@ -1506,25 +1506,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CREDITS
-
-
-    GAME DESIGN
-
-    Jaider Zapata
-
-    Michael Martinez
-
-
-    GAME
-    DEVELOPER
-
-    Luz Adriana Calderon
-
-    Yuliana Vidal
-
-
-    Thanks for playing'
+  m_text: "CREDITOS\n\nDISE\xD1O\nJaider Zapata\nLuz Adriana Calderon\n\nPROGRAMACI\xD3N\nMilena
+    \nYuliana Vidal\n\nGracias por Jugar"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
