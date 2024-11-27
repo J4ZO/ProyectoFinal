@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ChaseEnemy : State
 {
-    [SerializeField] private Transform player;
+    private Transform player;
     private DieState die;
     private NavMeshAgent agent;
     private AttackState attack; // call attack state
@@ -18,6 +18,7 @@ public class ChaseEnemy : State
         agent = GetComponent<NavMeshAgent>();
         attack = GetComponent<AttackState>();
         die = GetComponent<DieState>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

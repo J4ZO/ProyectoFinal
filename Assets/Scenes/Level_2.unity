@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LamparaCambioDeNivel 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4439762520455165776, guid: d84337e493971664abe608c32f8f3c84, type: 3}
+      propertyPath: Nivel
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7694204468404982460, guid: d84337e493971664abe608c32f8f3c84, type: 3}
       propertyPath: m_LocalPosition.x
       value: 51.567436
