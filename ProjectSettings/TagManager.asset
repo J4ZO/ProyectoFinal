@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
+  - Volumen
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - 
   - Water
   - UI
   - 
@@ -41,7 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Enemy
-    uniqueID: 4075523311
     locked: 0
