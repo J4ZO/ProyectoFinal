@@ -7,42 +7,45 @@ using UnityEngine.AI;
 public class NPCMovement : MonoBehaviour
 {
     private NavMeshAgent agentNPC;
-    [SerializeField] private float patrolTimer;
-    [SerializeField] private float patrolWait;
 
-    [SerializeField] private Transform[] wayPoints;
-    [SerializeField] private int wayPointIndex = 0;
-    private bool isMoving;
+    [SerializeField] private float patrolWait = 2f; // Tiempo de espera en cada waypoint
+    [SerializeField] private Transform[] wayPoints; // Lista de waypoints
+    [SerializeField] private float arrivalRadius = 2f; // Radio de llegada al waypoint
 
-    // Start is called before the first frame update
+    private int wayPointIndex = 0; // Índice del waypoint actual
+    private bool isWaiting = false; // Estado para controlar la espera
+
     void Start()
     {
         agentNPC = GetComponent<NavMeshAgent>();
+        if (wayPoints.Length > 0)
+        {
+            agentNPC.SetDestination(wayPoints[wayPointIndex].position); // Inicia movimiento hacia el primer waypoint
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Patrol();
+        // Revisar si el NPC está dentro del radio de llegada
+        if (!isWaiting && IsWithinArrivalRadius())
+        {
+            StartCoroutine(WaitAtWaypoint());
+        }
     }
 
-    private void Patrol()
+    private IEnumerator WaitAtWaypoint()
     {
-        if(agentNPC.remainingDistance <= agentNPC.stoppingDistance) // Check the remaining distance
-        {
-            patrolTimer += Time.deltaTime; // Increse the patrol time
+        isWaiting = true;
+        yield return new WaitForSeconds(patrolWait); // Espera en el waypoint
+        wayPointIndex = (wayPointIndex + 1) % wayPoints.Length; // Cambia al siguiente waypoint (vuelve al inicio si es el último)
+        agentNPC.SetDestination(wayPoints[wayPointIndex].position); // Establece el siguiente destino
+        isWaiting = false;
+    }
 
-            if(patrolTimer >= patrolWait)
-            {
-                wayPointIndex++; // Go to the other waypoint
-                patrolTimer = 0;
-            }
-
-            if(wayPointIndex == wayPoints.Length)
-            {
-                wayPointIndex = 0; // In case the npc arrive to the last waypoint
-            }
-        }
-        agentNPC.SetDestination(wayPoints[wayPointIndex].position);
+    private bool IsWithinArrivalRadius()
+    {
+        // Calcula la distancia entre el NPC y el waypoint actual
+        float distance = Vector3.Distance(transform.position, wayPoints[wayPointIndex].position);
+        return distance <= arrivalRadius;
     }
 }
