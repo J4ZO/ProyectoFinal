@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public Animator animator; // Referencia al Animator del jugador.
+    //public Animator animator; // Referencia al Animator del jugador.
     public float attackRange = 1.5f; // Rango del ataque.
     public int attackDamage = 10; // Daño que el jugador inflige.
     public LayerMask enemyLayer; // Enemigos detectables.
@@ -19,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         // Activar la animación de ataque
-        animator.SetTrigger("AttackTrigger");
+        //animator.SetTrigger("AttackTrigger");
 
         // Detectar enemigos en el rango de ataque
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
