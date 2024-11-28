@@ -47,7 +47,7 @@ public class MenuPausa : MonoBehaviour
 
     public void Salir()
     {
-        Debug.Log("Cerrando el juego");
-        Application.Quit();
+        Time.timeScale = 1f; // Asegúrate de restaurar el tiempo antes de cambiar de escena.
+        SceneManager.LoadScene("Menu");
     }
 }
