@@ -12,9 +12,18 @@ public class MainMenu : MonoBehaviour
     public GameObject menuOpciones;
     public GameObject menuCreditos;
     
+    
     // Referencia al AudioMixer
     [SerializeField] private AudioMixer audioMixer;
+    public Slider slider;
+    public float sliderValue;
     public Image filtroBrillo;//Imagen que simula el brillo
+
+    private void Start()
+    {
+        slider.value = PlayerPrefs.GetFloat("brillo", 5f);
+        filtroBrillo.color = new Color(filtroBrillo.color.r,filtroBrillo.color.g, filtroBrillo.color.b, slider.value);
+    }
 
     // Método para cargar la siguiente escena (botón Jugar)
     public void Play()
@@ -52,11 +61,11 @@ public class MainMenu : MonoBehaviour
         audioMixer.SetFloat("Volumen", volumen);
     }
 
-    public void CambiarBrillo(float brillo)
+    public void CambiarBrillo(float valor)
     {
-        // Ajusta la opacidad del filtro según el brillo
-        Color colorActual = filtroBrillo.color;
-        colorActual.a = 1 - brillo; // Reduce opacidad para más brillo
-        filtroBrillo.color = colorActual;
+        sliderValue = valor;
+        PlayerPrefs.SetFloat("brillo", sliderValue);
+        filtroBrillo.color = new Color(filtroBrillo.color.r, filtroBrillo.color.g, filtroBrillo.color.b, slider.value);
+
     }
 }
