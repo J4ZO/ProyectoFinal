@@ -6,15 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jaider Escena/Menu.unity
-    guid: 0cfad9fb09c64764cb4268315be117cd
+    path: Assets/Scenes/Menu.unity
+    guid: 89871484c33976148900bd5073e3d68a
   - enabled: 1
-    path: Assets/Scenes/Jaider Escena/Level_1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Jaider Escena/Level_2.unity
-    guid: 6312df926b06a7646be0525146d9c8fb
-  - enabled: 0
-    path: Assets/Scenes/Jaider Escena/Level_3.unity
-    guid: aab813bee81deaa4e90f9c4e43d80542
+    path: Assets/Scenes/Level1.unity
+    guid: caa4aa147e045ae4eb7a0db52787a4af
   m_configObjects: {}
