@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7848768438588818421
 Transform:
   m_ObjectHideFlags: 0
@@ -188,7 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd78b7169039f145a7d3eee7b8817b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   isInRange: 0
 --- !u!114 &2751616563867423175
 MonoBehaviour:
@@ -216,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 0
+  increase: 20
 --- !u!135 &6744656517924261635
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class DieState : State
 {
+    private ChaseEnemy chase;
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
+    [SerializeField] private float increase;
     private bool IsDead;
 
     void Start()
     {
+        chase = GetComponent<ChaseEnemy>();
         currentHealth = maxHealth;
     }
 
     public override State RunCurrentState()
     {
+        if(IsDead)
+        {
+            return chase;
+        }
         return this;
     }
 
@@ -35,10 +42,16 @@ public class DieState : State
     {
         gameObject.SetActive(false);
         Debug.Log("Muerto enemigo");
+        currentHealth = SetMaxHealth(increase);
     }
 
     public bool GetDie()
     {
         return IsDead;
+    }
+
+    private float SetMaxHealth(float increase)
+    {
+        return maxHealth += increase;
     }
 }
