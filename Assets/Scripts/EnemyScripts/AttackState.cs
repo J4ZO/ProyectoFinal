@@ -5,14 +5,12 @@ using UnityEngine;
 public class AttackState : State
 {
     private ChaseEnemy chase; // call attack state
-    private DieState die;
     private bool isAttacking;
     private Coroutine attackCoroutine; 
 
     void Start()
     {
         chase = GetComponent<ChaseEnemy>();
-        die = GetComponent<DieState>();
     }
     public override State RunCurrentState()
     {
@@ -20,10 +18,6 @@ public class AttackState : State
         {
             attackCoroutine ??= StartCoroutine(WaitAttack());
             return this; // Stay in attack state
-        }
-        else if(die. GetDie()) // Change Die State
-        {
-            return die;
         }
         else
         {

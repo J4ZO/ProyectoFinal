@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ChaseEnemy : State
 {
     private Transform player;
-    private DieState die;
+
     private NavMeshAgent agent;
     private AttackState attack; // call attack state
 
@@ -17,7 +17,6 @@ public class ChaseEnemy : State
     {
         agent = GetComponent<NavMeshAgent>();
         attack = GetComponent<AttackState>();
-        die = GetComponent<DieState>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -32,10 +31,6 @@ public class ChaseEnemy : State
         if(isInRange) // Change Attack State
         {
             return attack;
-        }
-        else if(die. GetDie()) // Change Die State
-        {
-            return die;
         }
         else
         {

@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 89871484c33976148900bd5073e3d68a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1.unity
     guid: caa4aa147e045ae4eb7a0db52787a4af
+  - enabled: 1
+    path: Assets/Scenes/Jaider Escena/Menu.unity
+    guid: 0cfad9fb09c64764cb4268315be117cd
+  - enabled: 1
+    path: Assets/Scenes/Jaider Escena/Level_1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

@@ -5,12 +5,12 @@ using UnityEngine;
 public class TestAttackPlayer : MonoBehaviour
 {
     private bool isAttacking;
-    private DieState die;
+    private EnemyController die;
     [SerializeField] private GameObject enemy;
 
     void Start()
     {
-        die = enemy.GetComponent<DieState>(); 
+        die = enemy.GetComponent<EnemyController>(); 
     }
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Enemy"))
