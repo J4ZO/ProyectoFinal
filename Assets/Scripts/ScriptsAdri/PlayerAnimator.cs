@@ -30,5 +30,8 @@ public class PlayerAnimator : MonoBehaviour
 
         x = Input.GetAxis("Horizontal");
         transform.Rotate(Vector3.up * speedRotate * Time.deltaTime * x);
+
+        animator.SetFloat("SpeedX", x);
+        animator.SetFloat("SpeedY", y);
     }
 }
