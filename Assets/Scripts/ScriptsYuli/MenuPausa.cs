@@ -62,8 +62,8 @@ public class MenuPausa : MonoBehaviour
 
     public void Restaurar()
     {
-        Time.timeScale = 0f ;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f; // Asegúrate de restaurar el tiempo a 1 antes de reiniciar.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Salir()
