@@ -4,45 +4,51 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private ChaseEnemy chase;
+    [SerializeField] private GameObject enemy;
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
     [SerializeField] private float increase;
-    private bool IsDead;
+    private bool isDead;
+    private Animator animator;
 
     void Start()
     {
-        chase = GetComponent<ChaseEnemy>();
         currentHealth = maxHealth;
+        animator = enemy.GetComponent<Animator>();
     }
 
     public void Damage(float damage)
     {
+        //animator.SetTrigger("Damage");
         Debug.Log("Quitando vida");
         currentHealth -=damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         if(currentHealth <= 0f)
         {
-            Die();
-            IsDead = true;
+            isDead = true;
+            StartCoroutine(WaitForDie());
         }
-    }
-
-    private void Die()
-    {
-        gameObject.SetActive(false);
-        Debug.Log("Muerto enemigo");
-        currentHealth = SetMaxHealth(increase);
     }
 
     public bool GetDie()
     {
-        return IsDead;
+        return isDead;
     }
 
     private float SetMaxHealth(float increase)
     {
         return maxHealth += increase;
+    }
+
+    IEnumerator WaitForDie()
+    {
+        animator.SetBool("Die",true);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 2f);
+        enemy.SetActive(false);
+        Debug.Log("Muerto enemigo");
+        currentHealth = SetMaxHealth(increase);
+        isDead = false;
+        animator.SetBool("Die",false);
     }
 }

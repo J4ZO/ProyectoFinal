@@ -10,7 +10,12 @@ public class ChaseEnemy : State
     private NavMeshAgent agent;
     private AttackState attack; // call attack state
 
+    private EnemyController die;
+
     [SerializeField] private bool isInRange;
+
+    
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +23,18 @@ public class ChaseEnemy : State
         agent = GetComponent<NavMeshAgent>();
         attack = GetComponent<AttackState>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        die = GetComponentInChildren<EnemyController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(player.position);
+        if(!die.GetDie())
+        {
+            agent.SetDestination(player.position);
+            animator.SetTrigger("Run");
+        }
     }
 
     public override State RunCurrentState()

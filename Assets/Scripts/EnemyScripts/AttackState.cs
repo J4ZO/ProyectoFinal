@@ -5,45 +5,42 @@ using UnityEngine;
 public class AttackState : State
 {
     private ChaseEnemy chase; // call attack state
-    private bool isAttacking;
+    [SerializeField] private bool isAttacking;
     private Coroutine attackCoroutine; 
+    private Animator animator;
 
     void Start()
     {
         chase = GetComponent<ChaseEnemy>();
+        animator = GetComponent<Animator>();
+        
     }
     public override State RunCurrentState()
     {
         if(isAttacking)
         {
-            attackCoroutine ??= StartCoroutine(WaitAttack());
+            AttackPlayer();
             return this; // Stay in attack state
         }
         else
         {
-            if (attackCoroutine != null) // Stop coroutine if is not in the attack zone
-            {
-                StopCoroutine(attackCoroutine);
-                attackCoroutine = null; 
-            }
+
             return chase; // Change chase state
         }
         
         
     }
 
-    private IEnumerator WaitAttack()
-    { 
-        while (true) 
-        {
-            Debug.Log("Atacando al jugador");
-            yield return new WaitForSeconds(1f); 
-        }
-    }
 
+    private void AttackPlayer()
+    {
+
+        Debug.Log("Atacando al jugador");
+    }
 
     private void OnTriggerEnter(Collider other) 
     {
+        animator.SetTrigger("Attack");
         isAttacking = other.CompareTag("Player") ? true : false;
     }
     private void OnTriggerExit(Collider other) 
