@@ -10,12 +10,19 @@ public class NPCInteraction : MonoBehaviour
     private int indexTexts = 0;
     private bool isPlayerInRange = false;
 
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     // Update is called once per frame
     void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Pulso E");
+            animator.SetTrigger("isTalking");
             textNPC.SetActive(true);
         }
         ShowMessages();
