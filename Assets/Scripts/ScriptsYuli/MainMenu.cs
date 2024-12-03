@@ -56,6 +56,7 @@ public class MainMenu : MonoBehaviour
         menuControles.SetActive(true);
     }
 
+    // Método para mostrar el panel de controles desde el botón Jugar
     public void ShowPanelPlayControles()
     {
         menuPrincipal.SetActive(false);
@@ -69,9 +70,10 @@ public class MainMenu : MonoBehaviour
     }
 
     // Método para cargar la siguiente escena desde el panel Play
-    public void Play()
+    public void Jugar()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // Cargar la escena de la historia (asumimos que se llama "Historia")
+        SceneManager.LoadScene("Historia");
     }
 
     // Método para cambiar el volumen
