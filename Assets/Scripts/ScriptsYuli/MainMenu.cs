@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
@@ -11,48 +9,69 @@ public class MainMenu : MonoBehaviour
     public GameObject menuPrincipal;
     public GameObject menuOpciones;
     public GameObject menuCreditos;
-    
-    
+    public GameObject menuControles; // Nuevo panel de controles
+    public GameObject panelPlayControles; // Panel de controles desde el botón Jugar
+
     // Referencia al AudioMixer
     [SerializeField] private AudioMixer audioMixer;
     public Slider slider;
     public float sliderValue;
-    public Image filtroBrillo;//Imagen que simula el brillo
+    public Image filtroBrillo; // Imagen que simula el brillo
 
     private void Start()
     {
+        // Configurar brillo inicial
         slider.value = PlayerPrefs.GetFloat("brillo", 5f);
-        filtroBrillo.color = new Color(filtroBrillo.color.r,filtroBrillo.color.g, filtroBrillo.color.b, slider.value);
+        filtroBrillo.color = new Color(filtroBrillo.color.r, filtroBrillo.color.g, filtroBrillo.color.b, slider.value);
+
+        // Mostrar el menú principal al iniciar
+        ShowMenuPrincipal();
     }
 
-    // Método para cargar la siguiente escena (botón Jugar)
-    public void Play()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    // Método para mostrar el menú principal
+    // Métodos para mostrar los diferentes menús
     public void ShowMenuPrincipal()
     {
         menuPrincipal.SetActive(true);
         menuOpciones.SetActive(false);
         menuCreditos.SetActive(false);
+        menuControles.SetActive(false);
+        panelPlayControles.SetActive(false);
     }
 
-    // Método para mostrar el menú de opciones
     public void ShowMenuOpciones()
     {
         menuPrincipal.SetActive(false);
         menuOpciones.SetActive(true);
-        menuCreditos.SetActive(false);
     }
 
-    // Método para mostrar el menú de créditos
     public void ShowMenuCreditos()
     {
         menuPrincipal.SetActive(false);
-        menuOpciones.SetActive(false);
         menuCreditos.SetActive(true);
+    }
+
+    public void ShowMenuControles()
+    {
+        menuPrincipal.SetActive(false);
+        menuControles.SetActive(true);
+    }
+
+    public void ShowPanelPlayControles()
+    {
+        menuPrincipal.SetActive(false);
+        panelPlayControles.SetActive(true); // Mostrar el panel de controles desde Jugar
+    }
+
+    // Métodos para cerrar paneles y volver al menú principal
+    public void VolverAlMenuPrincipal()
+    {
+        ShowMenuPrincipal();
+    }
+
+    // Método para cargar la siguiente escena desde el panel Play
+    public void Play()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Método para cambiar el volumen
@@ -66,6 +85,5 @@ public class MainMenu : MonoBehaviour
         sliderValue = valor;
         PlayerPrefs.SetFloat("brillo", sliderValue);
         filtroBrillo.color = new Color(filtroBrillo.color.r, filtroBrillo.color.g, filtroBrillo.color.b, slider.value);
-
     }
 }
