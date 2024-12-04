@@ -5,26 +5,15 @@ using UnityEngine;
 public class LogicaPies : MonoBehaviour
 {
     public PlayerAnimator playerAnimator;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+   
     private void OnTriggerStay(Collider other)
     {
-        playerAnimator.puedoSaltar = true;
+        playerAnimator.grounded = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        playerAnimator.puedoSaltar = false;
+        playerAnimator.grounded = false;
     }
 }
 
