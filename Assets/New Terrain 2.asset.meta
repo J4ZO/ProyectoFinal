@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/New Terrain 2.asset.meta
 guid: aa4572e5bf76fbd46a0f134ec1163a1b
+=======
+guid: 4408606d7b65d5943b6681da55e9ca05
+>>>>>>> Yuliana:Assets/Animations/MoveCredits.anim.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 15600000
