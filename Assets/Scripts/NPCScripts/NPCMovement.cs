@@ -10,7 +10,7 @@ public class NPCMovement : MonoBehaviour
 
     [SerializeField] private float patrolWait = 2f; // Tiempo de espera en cada waypoint
     [SerializeField] private Transform[] wayPoints; // Lista de waypoints
-    [SerializeField] private float arrivalRadius = 2f; // Radio de llegada al waypoint
+    [SerializeField] private float arrivalRadius = 3f; // Radio de llegada al waypoint
 
     private int wayPointIndex = 0; // Índice del waypoint actual
     private bool isWaiting = false; // Estado para controlar la espera
@@ -18,6 +18,7 @@ public class NPCMovement : MonoBehaviour
     void Start()
     {
         agentNPC = GetComponent<NavMeshAgent>();
+        agentNPC.stoppingDistance = arrivalRadius;
         if (wayPoints.Length > 0)
         {
             agentNPC.SetDestination(wayPoints[wayPointIndex].position); // Inicia movimiento hacia el primer waypoint
@@ -27,7 +28,7 @@ public class NPCMovement : MonoBehaviour
     void Update()
     {
         // Revisar si el NPC está dentro del radio de llegada
-        if (!isWaiting && IsWithinArrivalRadius())
+        if (!isWaiting && !agentNPC.pathPending && agentNPC.remainingDistance <= arrivalRadius)
         {
             StartCoroutine(WaitAtWaypoint());
         }
