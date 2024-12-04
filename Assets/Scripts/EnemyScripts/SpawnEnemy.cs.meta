@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/EnemyScripts/SpawnEnemy.cs.meta
 guid: c25356b413bfe134484d796c2d11d796
+========
+guid: 8c5bf81c262018b4485c59fd1a688ff6
+>>>>>>>> Yuliana:Assets/Scripts/ScriptsYuli/Collectable.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

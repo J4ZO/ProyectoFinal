@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/NPCScripts/CombineMesh.cs.meta
 guid: 2e0c3cf50f73b9a4f9a05b4969c2480f
+========
+guid: 5c3a1da57e52c5241aca5b415cc7a614
+>>>>>>>> Yuliana:Assets/Scripts/ScriptsYuli/Historia.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

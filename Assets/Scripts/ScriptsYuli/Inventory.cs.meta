@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/NPCScripts/NPCInteraction.cs.meta
+guid: 2243ccc58317a174f9dc5c5937497eb4
+========
+guid: 9fbd6ce88723b93478cc194bbbb3efae
+>>>>>>>> Yuliana:Assets/Scripts/ScriptsYuli/Inventory.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
