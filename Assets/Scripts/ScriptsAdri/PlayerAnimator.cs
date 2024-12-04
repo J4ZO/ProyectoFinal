@@ -48,12 +48,12 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (!estoyAtacando)
         {
-            transform.Rotate(0, x * Time.deltaTime * speedRotate * 0.5f , 0);
+            transform.Rotate(0, x * Time.deltaTime * speedRotate * 0.5f, 0);
             transform.Translate(0, 0, y * Time.deltaTime * speedMovement);
         }
-       
+
     }
-    // Update is called once per frame
+
     void Update()
     {
         y = Input.GetAxis("Vertical");
@@ -61,34 +61,35 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetFloat("SpeedX", x);
         animator.SetFloat("SpeedY", y);
 
-        // Si el jugador está atacando o no está en el suelo, no se realizan acciones
-        if (!estoyAtacando && grounded)
+   
+        if (!estoyAtacando)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) // Salto
+            if (Input.GetKeyDown(KeyCode.Space) && grounded)  
             {
-                animator.SetBool("Salto", true);
-                rb.AddForce(new Vector3(0, fuerzaDeSalto, 0), ForceMode.Impulse);
+                Salto();
             }
 
-            // Cambiar el estado del arma al presionar R
+            
+            if (Input.GetKeyDown(KeyCode.F) && !armaActiva && grounded)  
+            {
+                animator.SetTrigger("Puños");
+                AtacarConPuños();
+            }
+
+            if (Input.GetMouseButtonDown(0) && grounded && armaActiva)  
+            {
+                animator.SetTrigger("Arma");
+                AtacarConPistola();
+            }
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 CambiarEstadoArma();
             }
 
-            // Detecta los enemigos y ataca si es necesario
-            if (DetectarEnemigo())
+            if (DetectarEnemigo() && !armaActiva && !estoyAtacando)
             {
-                if (armaActiva)  // Si tiene el arma activa
-                {
-                    animator.SetTrigger("Arma");
-                    AtacarConPistola();
-                }
-                else  // Si no tiene el arma, ataca con los puños
-                {
-                    animator.SetTrigger("Puños");
-                    AtacarConPuños();
-                }
+                AtacarConPuños();
             }
         }
 
@@ -101,29 +102,53 @@ public class PlayerAnimator : MonoBehaviour
             Caigo();
         }
     }
-    public void Caigo()
+
+    void Salto()
+    {
+        if (grounded) 
+        {
+            animator.SetBool("Salto", true); 
+            rb.AddForce(new Vector3(0, fuerzaDeSalto, 0), ForceMode.Impulse);  
+            grounded = false; 
+        }
+    }
+
+    void Caigo()
     {
         animator.SetBool("Grounded", false);
-        animator.SetBool("Salto", false);
-    }
-    private void AtacarConPistola()
-    {
-        estoyAtacando = true;
-
-        // Lógica para disparar con la pistola
-        Debug.Log("Disparando con la pistola");
-
-        StartCoroutine(ResetAtaque());
+        animator.SetBool("Salto", false);   
     }
 
     private void AtacarConPuños()
     {
-        estoyAtacando = true;
+        if (!estoyAtacando)
+        {
+            estoyAtacando = true;
+            Debug.Log("Atacando con puños");
+            StartCoroutine(ResetAtaque());
+        }
+    }
 
-        // Lógica para golpear con los puños
-        Debug.Log("Atacando con puños");
+    private void AtacarConPistola()
+    {
+        if (!estoyAtacando)
+        {
+            estoyAtacando = true;
+            Debug.Log("Disparando con la pistola");
+            StartCoroutine(ResetAtaque());
+        }
+    }
 
-        StartCoroutine(ResetAtaque());
+    private IEnumerator ResetAtaque()
+    {
+        yield return new WaitForSeconds(1f); 
+        estoyAtacando = false; 
+    }
+
+    private bool DetectarEnemigo()
+    {
+        Collider[] enemigos = Physics.OverlapSphere(transform.position, rangoDeteccion, capaEnemigos);
+        return enemigos.Length > 0;
     }
 
     private void CambiarEstadoArma()
@@ -138,27 +163,4 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool("ArmaActiva", armaActiva);
     }
 
-    private bool DetectarEnemigo()
-    {
-        Collider[] enemigos = Physics.OverlapSphere(transform.position, rangoDeteccion, capaEnemigos);
-        return enemigos.Length > 0;
-    }
-
-    private IEnumerator ResetAtaque()
-    {
-        yield return new WaitForSeconds(1f); // Tiempo de duración del ataque
-        estoyAtacando = false;
-    }
-    private void EstoyAtacando(bool estado)
-    {
-        animator.SetBool("IsAttacking", estado);
-        estoyAtacando = estado;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // Visualizar el rango de detección en la vista de escena
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, rangoDeteccion);
-    }
 }
